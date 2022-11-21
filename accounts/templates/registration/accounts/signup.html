@@ -1,0 +1,72 @@
+{% extends 'registration/accounts/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block title %}
+ثبت نام 
+{% endblock %}
+{% block content %}
+{% if form.non_field_errors %}
+<div class="error" style="background-color: rgb(180, 129, 129);">
+	{% for error in form.non_field_errors %}
+	<span>{{error}}</span>
+	{% endfor %}
+</div>
+{% endif %}
+{% if access %}
+<div class="container-login100">
+	<div class="wrap-login100">
+		<form class="login100-form validate-form" method="post">{% csrf_token %}
+			<span class="login100-form-title p-b-26 myfont">
+				ثبت نام
+			</span>
+			<span class="login100-form-title p-b-48">
+				<img src="{% static 'registration/login/images/icons/favicon.ico' %}" alt="Login Logo" class="brand-image img-circle elevation-3"
+				style="opacity: .8" width="60" height="60">
+			</span>
+
+			<div class="wrap-input100 validate-input" style="text-align: right" data-validate = "Valid email is: a@b.c">
+				{{form.username|add_class:"input100"}}
+				<span class="focus-input100" data-placeholder="نام کاربری"></span>
+			</div>
+
+			<div class="wrap-input100 validate-input" style="text-align: right" data-validate="Enter password">
+				{{form.email|add_class:"input100"}}
+				<span class="focus-input100" data-placeholder="ایمیل"></span>
+			</div>
+
+			<div class="wrap-input100 validate-input" style="text-align: right" data-validate="Enter password">
+				{{form.phone_number|add_class:"input100"}}
+				<span class="focus-input100" data-placeholder="شماره موبایل"></span>
+			</div>
+
+			<div class="wrap-input100 validate-input" style="text-align: right" data-validate="Enter password">
+				{{form.national_code|add_class:"input100"}}
+				<span class="focus-input100" data-placeholder="کدملی"></span>
+			</div>
+
+			<div class="wrap-input100 validate-input" style="text-align: right" data-validate="Enter password">
+				{{form.password1|add_class:"input100"}}
+				<span class="focus-input100" data-placeholder="رمزعبور"></span>
+			</div>
+
+			<div class="wrap-input100 validate-input" style="text-align: right" data-validate="Enter password">
+				{{form.password2|add_class:"input100"}}
+				<span class="focus-input100" data-placeholder="تکرار رمزعبور"></span>
+			</div>
+
+			<div class="container-login100-form-btn">
+				<div class="wrap-login100-form-btn">
+					<div class="login100-form-bgbtn"></div>
+					<button class="login100-form-btn">
+						ثبت نام
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+{% else %}
+	<h2 style="color: rgb(240, 50, 50);">you dont have access to define librarian</h2>
+{% endif %}
+{% endblock %}
+

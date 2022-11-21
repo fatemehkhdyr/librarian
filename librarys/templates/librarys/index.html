@@ -1,0 +1,34 @@
+{% extends 'librarys/base.html' %}
+{% block navigation %}
+<a class="navbar-brand" href="{% url 'account:logout' %}">ٍExit</a>
+{% if request.user.is_superuser %}
+<a class="navbar-brand" href="{% url 'account:signup_librarian' %}">add new librarian</a>
+{% endif %}
+{% endblock %}
+{% block title %}
+<h2>Book List</h2>
+{% endblock %}
+{% block content %}
+<form class="search" action="{% url 'library:book_list' %}" method='get'>
+    {% csrf_token %}
+    <input type="search" placeholder="Search here..." name="usr_query" 
+       value='{{ query }}' required>
+    <button type="submit">Search</button>
+</form>
+<table>
+    <tr>
+      <th>name</th>
+      <th>publisher</th>
+      <th>author</th>
+      <th>category</th>
+    </tr>
+    {% for book in books %}
+        <tr>
+            <td>{{book.name}}</td>
+            <td>{{book.publisher}}</td>
+            <td>{{book.author}}</td>
+            <td>{% for cat in book.category.all %}{{ cat }},{% endfor %}</td>
+        </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
